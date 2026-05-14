@@ -11,20 +11,49 @@ namespace ArcadeLog
         private static void Main(string[] args)
         {
             // Lê o Ficheiro e Cria os Scores
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Indique o ficheiro.");
+                return;
+            }
+
+            string fileName = args[0];
+
             List<Score> scores = new List<Score>();
-            // CÓDIGO AQUI
+
+            foreach (string line in File.ReadAllLines(fileName))
+            {
+                string[] parts = line.Split(' ');
+                string name = parts[0];
+                int points = int.Parse(parts[1]);
+                scores.Add(new Score(name, points));
+            }
 
             // Ordena os Scores
-            // CÓDIGO AQUI
+            scores.Sort();
 
             // Agrupa por Medalha e Imprime (Gold → Silver → Bronze)
             // Escreve a lista no ficheiro ranking.txt
-            // CÓDIGO AQUI
+            string[] medals = { "Gold", "Silver", "Bronze"};
 
+            foreach (string medal in medals)
+            {
+                foreach (Score s in scores)
+                {
+                    if (s.Medal == medal)
+                    {
+                        Console.WriteLine(s);
+                    }
+                }
+            }
+            
+            File.WriteAllLines("ranking.txt", scores.ConvertAll(s => s.ToString()));
             Console.WriteLine("Ranking guardado em 'ranking.txt'.");
+            scores.Sort(new ScoreByNameComparer());
 
             // Ordena por Nome e Escreve em alpha.txt
-            // CÓDIGO AQUI
+            File.WriteAllLines("alpha.txt",scores.ConvertAll(s => s.ToString()));
+            Console.WriteLine("Lista alfabética guardada em 'alpha.txt'.");
 
             // Este programa mostra o seguinte no ecrã (exemplo: scores.txt com "Kronos 7400", "Luna 3800", "Rex 520", "Phantom 6100"):
             //

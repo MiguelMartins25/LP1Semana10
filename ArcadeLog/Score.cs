@@ -48,13 +48,11 @@ namespace ArcadeLog
 
         public int CompareTo(Score other)
         {
-            // CÓDIGO AQUI
             return other.Points.CompareTo(this.Points);
         }
 
         public override string ToString()
         {
-            // CÓDIGO AQUI
             return $"{Name} [{Medal}] : {Points}";
         }
     }
