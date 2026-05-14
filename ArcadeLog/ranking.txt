@@ -1,0 +1,4 @@
+Nova [Gold] : 9999
+Echo [Gold] : 8100
+Vex [Silver] : 5200
+Kira [Bronze] : 1800

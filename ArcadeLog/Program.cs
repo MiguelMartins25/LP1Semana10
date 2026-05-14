@@ -47,13 +47,17 @@ namespace ArcadeLog
                 }
             }
             
-            File.WriteAllLines("ranking.txt", scores.ConvertAll(s => s.ToString()));
+            string folder = Path.GetDirectoryName(fileName);
+
+            string rankingPath = Path.Combine(folder, "ranking.txt");
+            string alphaPath = Path.Combine(folder, "alpha.txt");
+            
+            File.WriteAllLines(rankingPath, scores.ConvertAll(s => s.ToString()));
             Console.WriteLine("Ranking guardado em 'ranking.txt'.");
             scores.Sort(new ScoreByNameComparer());
 
             // Ordena por Nome e Escreve em alpha.txt
-            File.WriteAllLines("alpha.txt",scores.ConvertAll(s => s.ToString()));
-            Console.WriteLine("Lista alfabética guardada em 'alpha.txt'.");
+            File.WriteAllLines(alphaPath,scores.ConvertAll(s => s.ToString()));
 
             // Este programa mostra o seguinte no ecrã (exemplo: scores.txt com "Kronos 7400", "Luna 3800", "Rex 520", "Phantom 6100"):
             //
