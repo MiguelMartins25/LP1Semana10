@@ -1,0 +1,4 @@
+Nova 10500
+Echo 8100
+Vex 5200
+Kira 1800
